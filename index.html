@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Authentication System</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0c1e6;
+    }
+
+    .container {
+        max-width: 400px;
+        width: 100%;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #e7a6ec;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-control {
+        margin-bottom: 20px;
+    }
+
+    .form-control label {
+        margin-bottom: 5px;
+    }
+
+    .form-control input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .form-control input:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+
+    button {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #8e11a1;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .register-link {
+        text-align: center;
+    }
+
+    .register-link a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .register-link a:hover {
+        text-decoration: underline;
+    }
+
+    #securedPage {
+        text-align: center;
+    }
+
+    #logoutBtn {
+        margin-top: 20px;
+        background-color: #dc3545;
+    }
+
+    #logoutBtn:hover {
+        background-color: #c82333;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <form id="loginForm" class="form">
+        <h2>Login</h2>
+        <div class="form-control">
+            <label for="loginUsername">Username</label>
+            <input type="text" id="loginUsername" placeholder="Enter username" required>
+        </div>
+        <div class="form-control">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter password" required>
+        </div>
+        <button type="submit">Login</button>
+        <p class="register-link">Don't have an account? <a href="#" id="registerLink">Register</a></p>
+    </form>
+
+    <form id="registerForm" class="form hidden">
+        <h2>Register</h2>
+        <div class="form-control">
+            <label for="registerUsername">Username</label>
+            <input type="text" id="registerUsername" placeholder="Enter username" required>
+        </div>
+        <div class="form-control">
+            <label for="registerPassword">Password</label>
+            <input type="password" id="registerPassword" placeholder="Enter password" required>
+        </div>
+        <button type="submit">Register</button>
+        <p class="register-link">Already have an account? <a href="#" id="loginLink">Login</a></p>
+    </form>
+
+    <div id="securedPage" class="hidden">
+        <h2>Welcome to the Secured Page!</h2>
+        <p>You are now logged in.</p>
+        <button id="logoutBtn">Logout</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const registerLink = document.getElementById('registerLink');
+        const loginLink = document.getElementById('loginLink');
+        const securedPage = document.getElementById('securedPage');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        registerLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            loginForm.classList.add('hidden');
+            registerForm.classList.remove('hidden');
+        });
+
+        loginLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            registerForm.classList.add('hidden');
+            loginForm.classList.remove('hidden');
+        });
+
+        loginForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            // Your login authentication logic here
+            // For simplicity, I'm just assuming a successful login
+            loginForm.reset();
+            loginForm.classList.add('hidden');
+            securedPage.classList.remove('hidden');
+        });
+
+        registerForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            // Your registration logic here
+            // For simplicity, I'm just assuming a successful registration
+            registerForm.reset();
+            registerForm.classList.add('hidden');
+            securedPage.classList.remove('hidden');
+        });
+
+        logoutBtn.addEventListener('click', function () {
+            securedPage.classList.add('hidden');
+            loginForm.classList.remove('hidden');
+        });
+    });
+</script>
+</body>
+</html>
